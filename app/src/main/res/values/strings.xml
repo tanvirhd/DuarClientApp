@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Duar Client App</string>
+
+    <string-array name="product_type">
+        <item>Electronics</item>
+        <item>Jewellery</item>
+        <item>Clothing</item>
+        <item>Craft</item>
+        <item>Skin Care / Beauty Product</item>
+        <item>Fragile</item>
+        <item>Other</item>
+    </string-array>
+
 </resources>
