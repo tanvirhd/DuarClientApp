@@ -1,56 +1,49 @@
 package com.duarbd.duarclientapp.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class ModelResponse {
+@Entity(tableName = "client_table")
+public class ModelClientRoom {
 
-    @SerializedName("clientid")
-    @Expose
+    @PrimaryKey (autoGenerate = false)
+    @NonNull
     private String clientid;
-    @SerializedName("clientContactNumber")
-    @Expose
-    private String clientContactNumber;
-    @SerializedName("clientBusinessName")
-    @Expose
-    private String clientBusinessName;
-    @SerializedName("clientBusinessLocationlat")
-    @Expose
-    private String clientBusinessLocationlat;
-    @SerializedName("clientBusinessLocationlang")
-    @Expose
-    private String clientBusinessLocationlang;
-    @SerializedName("clientAddress")
-    @Expose
-    private String clientAddress;
-    @SerializedName("clientProductType")
-    @Expose
-    private String clientProductType;
-    @SerializedName("response")
-    @Expose
-    private Integer response;
-    @SerializedName("status")
-    @Expose
-    private Integer status;
 
-    @SerializedName("pickupCharge")
-    @Expose
+    private String clientContactNumber;
+
+    private String clientBusinessName;
+
+    private String clientBusinessLocationlat;
+
+    private String clientBusinessLocationlang;
+
+    private String clientAddress;
+
+    private String clientProductType;
+
     private Integer pickupCharge;
 
-
-    public Integer getPickupCharge() {
-        return pickupCharge;
-    }
-
-    public void setPickupCharge(Integer pickupCharge) {
+    public ModelClientRoom(@NonNull String clientid, String clientContactNumber, String clientBusinessName,
+                           String clientBusinessLocationlat, String clientBusinessLocationlang, String clientAddress,
+                           String clientProductType, Integer pickupCharge) {
+        this.clientid = clientid;
+        this.clientContactNumber = clientContactNumber;
+        this.clientBusinessName = clientBusinessName;
+        this.clientBusinessLocationlat = clientBusinessLocationlat;
+        this.clientBusinessLocationlang = clientBusinessLocationlang;
+        this.clientAddress = clientAddress;
+        this.clientProductType = clientProductType;
         this.pickupCharge = pickupCharge;
     }
 
+    @NonNull
     public String getClientid() {
         return clientid;
     }
 
-    public void setClientid(String clientid) {
+    public void setClientid(@NonNull String clientid) {
         this.clientid = clientid;
     }
 
@@ -102,20 +95,11 @@ public class ModelResponse {
         this.clientProductType = clientProductType;
     }
 
-    public Integer getResponse() {
-        return response;
+    public Integer getPickupCharge() {
+        return pickupCharge;
     }
 
-    public void setResponse(Integer response) {
-        this.response = response;
+    public void setPickupCharge(Integer pickupCharge) {
+        this.pickupCharge = pickupCharge;
     }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Business Profile"
+        android:id="@+id/businessProfile" />
+    <item android:title="Delivery History"
+        android:id="@+id/deliveryHistory" />
+    <item android:title="Payments"
+        android:id="@+id/payments" />
+    <item android:title="My Shop"
+        android:id="@+id/myShop" />
+    <item android:title="Delivery Charge Chart"
+        android:id="@+id/deliveryChargeChart" />
+    <item android:title="Log-Out"
+        android:id="@+id/logout" />
+</menu>

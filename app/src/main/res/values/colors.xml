@@ -18,7 +18,14 @@
     <color name="black8">#888888</color>
     <color name="red_dark">#D53B2F</color>
 
-    <color name="d">#F8F5D9</color>
+
+    <color name="colorPrimary">#FFC107</color>
+    <color name="colorPrimaryDark">#FFC107</color>
+    <color name="colorAccent">#97FFC107</color>
+    <color name="lite_black">#FA615E5E</color>
+    <color name="lite_ash">#D1D1D1</color>
+    <color name="litegreen">#3FB643</color>
+    <color name="Misti">#ffd89b</color>
 
 
 

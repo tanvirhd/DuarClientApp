@@ -52,6 +52,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
             @Override
             public void onSuccess(String s) {
+                Utils.savePref(GlobalKey.FCM_TOKEN,s);
                 viewModelDuarClientApp.updateToken2(
                         new ModelToken(Utils.getPref(GlobalKey.CLIENT_ID,""),s))
                         .observe(ActivitySplashScreen.this, new Observer<ModelResponse>() {

@@ -16,6 +16,7 @@ import com.duarbd.duarclientapp.model.ModelClient;
 import com.duarbd.duarclientapp.model.ModelResponse;
 import com.duarbd.duarclientapp.model.ModelToken;
 import com.duarbd.duarclientapp.network.viewmodel.ViewModelDuarClientApp;
+import com.duarbd.duarclientapp.room.ViewModelRoom;
 import com.duarbd.duarclientapp.tools.GlobalKey;
 import com.duarbd.duarclientapp.tools.Utils;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +37,7 @@ public class ActivityLogin extends AppCompatActivity {
     Observable<Boolean> observable;
 
     private ViewModelDuarClientApp viewModelDuarClientApp;
+    private ViewModelRoom viewModelRoom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     void init (){
         viewModelDuarClientApp=new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(ViewModelDuarClientApp.class);
+        viewModelRoom=new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(ViewModelRoom.class);
     }
     void initObservables(){
         phoneObservable = RxTextView.textChanges(binding.phoneNumber).skip(1).map(new Function<CharSequence, String>() {
@@ -153,17 +156,23 @@ public class ActivityLogin extends AppCompatActivity {
                 if(modelResponse!=null && modelResponse.getResponse()==1) {
                     Utils.savePrefBoolean(GlobalKey.IS_LOGGED_IN,true);
                     Utils.savePref(GlobalKey.CLIENT_ID,client.getClientid());
+                    Utils.savePref(GlobalKey.CLIENT_NAME,modelResponse.getClientBusinessName());
                     storeFCMToken(client.getClientid());
+                    saveClientInf(modelResponse);//saving client info into local DB
                 }
                 else Toast.makeText(ActivityLogin.this, "Wrong Credential", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    private void saveClientInf(ModelResponse response){
+        viewModelRoom.saveClientInfo(response);
+    }
     private void storeFCMToken(String clientid) {
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
             @Override
             public void onSuccess(String s) {
+                Utils.savePref(GlobalKey.FCM_TOKEN,s);
                 viewModelDuarClientApp.storeToken2(new ModelToken(clientid,"client",s))
                            .observe(ActivityLogin.this, new Observer<ModelResponse>() {
                                @Override

@@ -7,10 +7,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.duarbd.duarclientapp.model.ModelClient;
+import com.duarbd.duarclientapp.model.ModelDeliveryRequest;
 import com.duarbd.duarclientapp.model.ModelResponse;
 import com.duarbd.duarclientapp.model.ModelToken;
 import com.duarbd.duarclientapp.network.ApiClient;
 import com.duarbd.duarclientapp.network.ApiInterface;
+
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -76,6 +79,43 @@ public class RepositoryDuarClientApp {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         Log.d(TAG, "storeToken2: error:"+throwable.fillInStackTrace());
+                    }
+                });
+        return result;
+    }
+
+    public LiveData<ModelResponse> sendDeliveryRequest(ModelDeliveryRequest deliveryRequest){
+        MutableLiveData<ModelResponse> result=new MutableLiveData<>();
+        apiRequest.sendDeliveryRequest(deliveryRequest).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ModelResponse>() {
+                    @Override
+                    public void accept(ModelResponse modelResponse) throws Exception {
+                        result.postValue(modelResponse);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "requestNewDelivery: error:"+throwable.getMessage());
+                    }
+                });
+        return result;
+    }
+
+    public LiveData<List<ModelDeliveryRequest>> getRequestedDeliveryListByClientId(String clientId){
+        ModelClient client=new ModelClient(clientId);
+        MutableLiveData<List<ModelDeliveryRequest>> result=new MutableLiveData<>();
+        apiRequest.getRequestedDeliveryListByClientId(client).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<ModelDeliveryRequest>>() {
+                    @Override
+                    public void accept(List<ModelDeliveryRequest> modelDeliveryRequests) throws Exception {
+                        result.postValue(modelDeliveryRequests);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "getRequestedDeliveryListByClientId: error:"+throwable.getMessage());
                     }
                 });
         return result;

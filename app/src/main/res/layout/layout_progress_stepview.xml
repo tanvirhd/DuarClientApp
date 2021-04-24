@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layout_progress_stepview">
+
+    <ImageView
+        android:id="@+id/statusIcon0"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/stepview_incomplete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/statusText0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Pending"
+        android:textColor="@color/black8"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/statusIcon0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/statusIcon0"
+        app:layout_constraintTop_toTopOf="@+id/statusIcon0" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/lite_ash"
+        app:layout_constraintBottom_toTopOf="@+id/statusIcon1"
+        app:layout_constraintEnd_toEndOf="@+id/statusIcon0"
+        app:layout_constraintStart_toStartOf="@+id/statusIcon0"
+        app:layout_constraintTop_toBottomOf="@+id/statusIcon0" />
+
+    <ImageView
+        android:id="@+id/statusIcon1"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/stepview_incomplete"
+        app:layout_constraintEnd_toEndOf="@+id/statusIcon0"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/statusIcon0"
+        app:layout_constraintTop_toBottomOf="@+id/statusIcon0" />
+
+    <TextView
+        android:id="@+id/statusText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Accepted"
+        android:textColor="@color/black8"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/statusIcon1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/statusIcon1"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/lite_ash"
+        app:layout_constraintBottom_toTopOf="@+id/statusIcon2"
+        app:layout_constraintEnd_toEndOf="@+id/statusIcon1"
+        app:layout_constraintStart_toStartOf="@+id/statusIcon1"
+        app:layout_constraintTop_toBottomOf="@+id/statusIcon1" />
+
+    <ImageView
+        android:id="@+id/statusIcon2"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/stepview_incomplete"
+        app:layout_constraintEnd_toEndOf="@+id/statusIcon1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/statusIcon1"
+        app:layout_constraintTop_toBottomOf="@+id/statusIcon1" />
+
+    <TextView
+        android:id="@+id/statusText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Received"
+        android:textColor="@color/black8"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/statusIcon2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/statusIcon2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="14dp"
+        android:text="Approximate pick-up time -- : --"
+        app:layout_constraintStart_toStartOf="@+id/statusText2"
+        app:layout_constraintTop_toBottomOf="@+id/statusText2" />
+
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/lite_ash"
+        app:layout_constraintBottom_toTopOf="@+id/statusIcon3"
+        app:layout_constraintEnd_toEndOf="@+id/statusIcon2"
+        app:layout_constraintStart_toStartOf="@+id/statusIcon2"
+        app:layout_constraintTop_toBottomOf="@+id/statusIcon2" />
+
+    <ImageView
+        android:id="@+id/statusIcon3"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/stepview_incomplete"
+        app:layout_constraintEnd_toEndOf="@+id/statusIcon2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/statusIcon2"
+        app:layout_constraintTop_toBottomOf="@+id/statusIcon2" />
+
+    <TextView
+        android:id="@+id/statusText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="On the way"
+        android:textColor="@color/black8"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/statusIcon3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/statusIcon3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your delivery is on it's way to be delivered"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black8"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="@+id/statusText3"
+        app:layout_constraintTop_toBottomOf="@+id/statusText3" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/lite_ash"
+        app:layout_constraintBottom_toTopOf="@+id/statusIcon4"
+        app:layout_constraintEnd_toEndOf="@+id/statusIcon3"
+        app:layout_constraintStart_toStartOf="@+id/statusIcon3"
+        app:layout_constraintTop_toBottomOf="@+id/statusIcon3" />
+
+    <ImageView
+        android:id="@+id/statusIcon4"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/stepview_incomplete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/statusIcon3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/statusIcon3"
+        app:layout_constraintTop_toBottomOf="@+id/statusIcon3" />
+
+    <TextView
+        android:id="@+id/statusText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Delivered"
+        android:textColor="@color/black8"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/statusIcon4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/statusIcon4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

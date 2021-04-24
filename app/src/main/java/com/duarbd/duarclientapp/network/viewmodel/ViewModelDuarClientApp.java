@@ -13,11 +13,14 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.duarbd.duarclientapp.model.ModelClient;
+import com.duarbd.duarclientapp.model.ModelDeliveryRequest;
 import com.duarbd.duarclientapp.model.ModelResponse;
 import com.duarbd.duarclientapp.model.ModelToken;
 import com.duarbd.duarclientapp.network.repository.RepositoryDuarClientApp;
 import com.duarbd.duarclientapp.network.work.WorkStoreToken;
 import com.duarbd.duarclientapp.network.work.WorkUpdateToken;
+
+import java.util.List;
 
 public class ViewModelDuarClientApp extends AndroidViewModel {
     private RepositoryDuarClientApp repository;
@@ -46,6 +49,7 @@ public class ViewModelDuarClientApp extends AndroidViewModel {
         return repository.storeToken2(clientToken);
     }
 
+    //not used anymore
     public void updateFCMToken(ModelToken token){
         Data inputdata=new Data.Builder()
                 .putString(PRAM1,token.getUid())
@@ -63,6 +67,7 @@ public class ViewModelDuarClientApp extends AndroidViewModel {
         WorkManager.getInstance(context).enqueue(request);
     }
 
+    //not used anymore
     public void storeFCMToken(ModelToken token){
         Data inputdata=new Data.Builder()
                 .putString(PRAM1,token.getUid())
@@ -80,4 +85,14 @@ public class ViewModelDuarClientApp extends AndroidViewModel {
                 .build();
         WorkManager.getInstance(context).enqueue(request);
     }
+
+
+    public LiveData<ModelResponse> sendDeliveryRequest(ModelDeliveryRequest deliveryRequest){
+        return repository.sendDeliveryRequest(deliveryRequest);
+    }
+
+    public LiveData<List<ModelDeliveryRequest>> getRequestedDeliveryListByClientId(String clientId){
+        return repository.getRequestedDeliveryListByClientId(clientId);
+    }
+
 }

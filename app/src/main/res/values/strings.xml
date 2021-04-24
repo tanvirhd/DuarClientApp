@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Duar Client App</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="parcel">parcel</string>
 
     <string-array name="product_type">
         <item>Electronics</item>
