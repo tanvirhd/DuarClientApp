@@ -95,4 +95,11 @@ public class ViewModelDuarClientApp extends AndroidViewModel {
         return repository.getRequestedDeliveryListByClientId(clientId);
     }
 
+    public LiveData<List<ModelDeliveryRequest>> getDeliveryHistoryByClientId(String clientid){
+        return repository.getDeliveryHistoryByClientId(clientid);
+    }
+    public LiveData<ModelResponse> updateClientPaymentStatus (ModelDeliveryRequest deliveryRequest){
+        return repository.updateClientPaymentStatus(deliveryRequest);
+    }
+
 }

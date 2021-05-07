@@ -13,14 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuarClientApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presenter.ActivityAddItem"></activity>
+        <activity android:name=".presenter.ActivityPayment"></activity>
+        <activity android:name=".presenter.ActivityDeliveryHistory" />
+        <activity android:name=".presenter.ActivityAddItem" />
         <activity android:name=".presenter.ActivityAddCategory" />
         <activity android:name=".presenter.ActivityShop" />
         <activity android:name=".presenter.ActivityOngoingOrderDetails" />
         <activity android:name=".presenter.ActivityLogin" />
         <activity android:name=".presenter.ActivityRequestFoodDelivery" />
-        <activity android:name=".presenter.ActivityRequestDelivery"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".presenter.ActivityRequestDelivery"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".presenter.ActivityHome" />
         <activity android:name=".presenter.ActivitySplashScreen">
             <intent-filter>
@@ -32,7 +35,7 @@
 
         <service android:name=".sevice.CustomFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
     </application>

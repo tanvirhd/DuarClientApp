@@ -111,16 +111,18 @@ public class ActivityHome extends AppCompatActivity implements AdapterOngoingDel
                 new Observer<List<ModelDeliveryRequest>>() {
                     @Override
                     public void onChanged(List<ModelDeliveryRequest> modelDeliveryRequests) {
-                        if(modelDeliveryRequests!=null){
-                            if(modelDeliveryRequests.size()!=0){
+                        if(modelDeliveryRequests!=null&&!modelDeliveryRequests.get(0).getResponse().equals("0")){
+                            if(!modelDeliveryRequests.get(0).getStatus().equals("NothingFound")){
                                 ongoingDeliveryList.clear();
                                 for(ModelDeliveryRequest request:modelDeliveryRequests)
                                     if(!request.getStatus().equals("4")) ongoingDeliveryList.add(request);
                                 adapterOngoingDelivery.notifyDataSetChanged();
                                 dialogLoading.dismiss();
                             }else {
+                                ongoingDeliveryList.clear();
+                                adapterOngoingDelivery.notifyDataSetChanged();
                                 dialogLoading.dismiss();
-                                //show no delivery page
+                                Toast.makeText(ActivityHome.this, "No ongoing request found", Toast.LENGTH_SHORT).show();
                             }
                         }else {
                             dialogLoading.dismiss();
@@ -135,16 +137,19 @@ public class ActivityHome extends AppCompatActivity implements AdapterOngoingDel
                 new Observer<List<ModelDeliveryRequest>>() {
                     @Override
                     public void onChanged(List<ModelDeliveryRequest> modelDeliveryRequests) {
-                        if(modelDeliveryRequests!=null){
-                            if(modelDeliveryRequests.size()!=0){
+                        if(modelDeliveryRequests!=null&&!modelDeliveryRequests.get(0).getResponse().equals("0")){
+                            if(!modelDeliveryRequests.get(0).getStatus().equals("NothingFound")){
+                                Log.d(TAG, "onChanged: !=0 called");
                                 ongoingDeliveryList.clear();
                                 for(ModelDeliveryRequest request:modelDeliveryRequests)
                                     if(!request.getStatus().equals("4")) ongoingDeliveryList.add(request);
                                 adapterOngoingDelivery.notifyDataSetChanged();
                                 binding.layoutOngoingOrderPage.swipeRefresh.setRefreshing(false);
                             }else {
+                                ongoingDeliveryList.clear();
+                                adapterOngoingDelivery.notifyDataSetChanged();
                                 binding.layoutOngoingOrderPage.swipeRefresh.setRefreshing(false);
-                                //show no delivery page
+                                Toast.makeText(ActivityHome.this, "No ongoing request found", Toast.LENGTH_SHORT).show();
                             }
                         }else {
                             binding.layoutOngoingOrderPage.swipeRefresh.setRefreshing(false);
@@ -164,20 +169,17 @@ public class ActivityHome extends AppCompatActivity implements AdapterOngoingDel
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.businessProfile:
-                Toast.makeText(this, "Business Profile", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
                 binding.drawerlayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.deliveryHistory:
-                Toast.makeText(this, "Delivery History", Toast.LENGTH_SHORT).show();
-                binding.drawerlayout.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(ActivityHome.this,ActivityDeliveryHistory.class));
                 break;
             case R.id.payments:
-                Toast.makeText(this, "Payments", Toast.LENGTH_SHORT).show();
-                binding.drawerlayout.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(ActivityHome.this,ActivityPayment.class));
                 break;
             case R.id.myShop:
                 startActivity(new Intent(ActivityHome.this,ActivityShop.class));
-                binding.drawerlayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.logout:
                 Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
@@ -190,14 +192,10 @@ public class ActivityHome extends AppCompatActivity implements AdapterOngoingDel
     @Override
     protected void onResume() {
         super.onResume();
+        binding.drawerlayout.closeDrawer(GravityCompat.START);
         getRequestedDeliveryListFromServer(Utils.getPref(GlobalKey.CLIENT_ID,""));
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        binding.drawerlayout.closeDrawer(GravityCompat.START);
-    }
 
     private Dialog setupDialog(Activity activity) {
         Dialog dialog = new Dialog(activity);

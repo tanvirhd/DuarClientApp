@@ -8,8 +8,8 @@
         android:id="@+id/payments" />
     <item android:title="My Shop"
         android:id="@+id/myShop" />
-    <item android:title="Delivery Charge Chart"
-        android:id="@+id/deliveryChargeChart" />
+  <!--  <item android:title="Delivery Charge Chart"
+        android:id="@+id/deliveryChargeChart" />-->
     <item android:title="Log-Out"
         android:id="@+id/logout" />
 </menu>

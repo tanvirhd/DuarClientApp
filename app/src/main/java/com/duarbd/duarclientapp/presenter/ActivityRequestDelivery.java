@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.UUID;
 
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
@@ -63,7 +64,7 @@ public class ActivityRequestDelivery extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRequestDeliveryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        //Log.d(TAG, "onCreate: "+Utils.getCustentDateTime24HRFormat()+" pickupcode="+pickCodeGenerator());
         init();
         initObservables();
 
@@ -97,6 +98,7 @@ public class ActivityRequestDelivery extends AppCompatActivity {
                     deliveryRequest = new ModelDeliveryRequest(
                             generate9DigitDeliveryID(client.getClientBusinessName()),
                             client.getClientid(),
+                            client.getClientBusinessName(),
                             binding.layoutRequestDeliveryPage.etCustomerName.getText().toString(),
                             binding.layoutRequestDeliveryPage.etCustomerNumber.getText().toString(),
                             binding.layoutRequestDeliveryPage.etProductType.getText().toString(),
@@ -110,7 +112,8 @@ public class ActivityRequestDelivery extends AppCompatActivity {
                             deliveryChargeChart.get(binding.layoutRequestDeliveryPage.deliveryArea.getText().toString()),
                             Integer.valueOf(binding.layoutRequestDeliveryPage.etProductPrice.getText().toString()),
                             selectedPickTime,
-                            getCustentTime24HRFormat()
+                            Utils.getCustentDateTime24HRFormat(),
+                            pickCodeGenerator()
                     );
                     sendDeliveryRequest(deliveryRequest);
                 } else {
@@ -139,8 +142,8 @@ public class ActivityRequestDelivery extends AppCompatActivity {
                     @Override
                     public void onChanged(ModelResponse modelResponse) {
                         if(modelResponse!=null&&modelResponse.getResponse()==1){
-
-                            Log.d(TAG, "onChanged: request sent successfully");
+                            onBackPressed();
+                            Toast.makeText(ActivityRequestDelivery.this, "request sent successfully", Toast.LENGTH_SHORT).show();
                         }else Toast.makeText(ActivityRequestDelivery.this, "Something went Wrong!! Try again", Toast.LENGTH_SHORT).show();
                         dialogLoading.dismiss();
                     }
@@ -149,6 +152,16 @@ public class ActivityRequestDelivery extends AppCompatActivity {
 
 
     private void init() {
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("New Delivery Request");
+        binding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black);
+        binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         dialogLoading = setupDialog(ActivityRequestDelivery.this);
         selectedPickTime = 0;
         binding.layoutRequestDeliveryPage.rb15min.setChecked(true);
@@ -242,11 +255,8 @@ public class ActivityRequestDelivery extends AppCompatActivity {
 
     }
 
-    public String getCustentTime24HRFormat(){
-        Calendar calendar = Calendar.getInstance();
-        DateFormat dateFormatDate = new SimpleDateFormat("dd-MM-yyyy");
-        DateFormat dateFormatTime = new SimpleDateFormat("HH:MM");
-        return dateFormatDate.format(calendar.getTime())+" "+dateFormatTime.format(calendar.getTime());
+    private String pickCodeGenerator(){
+        return UUID.randomUUID().toString().substring(0,5);
     }
 
 }

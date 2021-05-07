@@ -16,6 +16,10 @@ public class ModelDeliveryRequest implements Parcelable {
     @Expose
     private String clientID;
 
+    @SerializedName("clientName")
+    @Expose
+    private String clientName;
+
 
     @SerializedName("customerName")
     @Expose
@@ -83,18 +87,23 @@ public class ModelDeliveryRequest implements Parcelable {
     @Expose
     private String status;
 
+    @SerializedName("pickupCode")
+    @Expose
+    private String pickupCode;
+
 
     public ModelDeliveryRequest(){
 
     }
 
-    public ModelDeliveryRequest(String deliveryRequestId,String clientID, String customerName, String customerNumber,
+    public ModelDeliveryRequest(String deliveryRequestId,String clientID,String clientName, String customerName, String customerNumber,
                                 String productType, String deliveryArea, String deliveryAddressExtra, String pickUpAddress,
                                 String pickUpAddressLat, String pickUpAddressLang, String clientToken,
                                 int pickupCharge, int deliveryCharge, int productPrice, int pickupTime,
-                                String requestPlacedTime) {
+                                String requestPlacedTime,String pickupCode) {
         this.deliveryRequestId = deliveryRequestId;
         this.clientID=clientID;
+        this.clientName=clientName;
         this.customerName = customerName;
         this.customerNumber = customerNumber;
         this.productType = productType;
@@ -113,11 +122,14 @@ public class ModelDeliveryRequest implements Parcelable {
         this.deliveryStatus=0;
         this.riderName="";
         this.clientPaymentStatus="due";
+        this.pickupCode=pickupCode;
     }
+
 
     protected ModelDeliveryRequest(Parcel in) {
         deliveryRequestId = in.readString();
         clientID = in.readString();
+        clientName = in.readString();
         customerName = in.readString();
         customerNumber = in.readString();
         productType = in.readString();
@@ -137,6 +149,39 @@ public class ModelDeliveryRequest implements Parcelable {
         clientPaymentStatus = in.readString();
         response = in.readString();
         status = in.readString();
+        pickupCode = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(deliveryRequestId);
+        dest.writeString(clientID);
+        dest.writeString(clientName);
+        dest.writeString(customerName);
+        dest.writeString(customerNumber);
+        dest.writeString(productType);
+        dest.writeString(deliveryArea);
+        dest.writeString(deliveryAddressExtra);
+        dest.writeString(pickUpAddress);
+        dest.writeString(pickUpAddressLat);
+        dest.writeString(pickUpAddressLang);
+        dest.writeString(clientToken);
+        dest.writeInt(pickupCharge);
+        dest.writeInt(deliveryCharge);
+        dest.writeInt(productPrice);
+        dest.writeInt(pickupTime);
+        dest.writeString(requestPlacedTime);
+        dest.writeInt(deliveryStatus);
+        dest.writeString(riderName);
+        dest.writeString(clientPaymentStatus);
+        dest.writeString(response);
+        dest.writeString(status);
+        dest.writeString(pickupCode);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<ModelDeliveryRequest> CREATOR = new Creator<ModelDeliveryRequest>() {
@@ -151,44 +196,12 @@ public class ModelDeliveryRequest implements Parcelable {
         }
     };
 
-    public String getClientID() {
-        return clientID;
+    public String getPickupCode() {
+        return pickupCode;
     }
 
-    public void setClientID(String clientID) {
-        this.clientID = clientID;
-    }
-
-    public String getResponse() {
-        return response;
-    }
-
-    public void setResponse(String response) {
-        this.response = response;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getClientPaymentStatus() {
-        return clientPaymentStatus;
-    }
-
-    public void setClientPaymentStatus(String clientPaymentStatus) {
-        this.clientPaymentStatus = clientPaymentStatus;
-    }
-
-    public String getRiderName() {
-        return riderName;
-    }
-
-    public void setRiderName(String riderName) {
-        this.riderName = riderName;
+    public void setPickupCode(String pickupCode) {
+        this.pickupCode = pickupCode;
     }
 
     public String getDeliveryRequestId() {
@@ -197,6 +210,22 @@ public class ModelDeliveryRequest implements Parcelable {
 
     public void setDeliveryRequestId(String deliveryRequestId) {
         this.deliveryRequestId = deliveryRequestId;
+    }
+
+    public String getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(String clientID) {
+        this.clientID = clientID;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
     public String getCustomerName() {
@@ -319,33 +348,35 @@ public class ModelDeliveryRequest implements Parcelable {
         this.deliveryStatus = deliveryStatus;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getRiderName() {
+        return riderName;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(deliveryRequestId);
-        dest.writeString(clientID);
-        dest.writeString(customerName);
-        dest.writeString(customerNumber);
-        dest.writeString(productType);
-        dest.writeString(deliveryArea);
-        dest.writeString(deliveryAddressExtra);
-        dest.writeString(pickUpAddress);
-        dest.writeString(pickUpAddressLat);
-        dest.writeString(pickUpAddressLang);
-        dest.writeString(clientToken);
-        dest.writeInt(pickupCharge);
-        dest.writeInt(deliveryCharge);
-        dest.writeInt(productPrice);
-        dest.writeInt(pickupTime);
-        dest.writeString(requestPlacedTime);
-        dest.writeInt(deliveryStatus);
-        dest.writeString(riderName);
-        dest.writeString(clientPaymentStatus);
-        dest.writeString(response);
-        dest.writeString(status);
+    public void setRiderName(String riderName) {
+        this.riderName = riderName;
+    }
+
+    public String getClientPaymentStatus() {
+        return clientPaymentStatus;
+    }
+
+    public void setClientPaymentStatus(String clientPaymentStatus) {
+        this.clientPaymentStatus = clientPaymentStatus;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

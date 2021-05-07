@@ -130,7 +130,6 @@ public class ActivityLogin extends AppCompatActivity {
         }
     }
 
-
     private Boolean isValid(String s1,String s2){
         if(s1.equals("") || s2.equals("") || s1.length()!=11){
             return false;
@@ -164,6 +163,7 @@ public class ActivityLogin extends AppCompatActivity {
             }
         });
     }
+
 
     private void saveClientInf(ModelResponse response){
         viewModelRoom.saveClientInfo(response);

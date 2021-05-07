@@ -104,12 +104,13 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/subtext2_statustext2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textSize="14dp"
-        android:text="Approximate pick-up time -- : --"
+        android:textColor="@color/litegreen"
+        android:text="A rider is on the way to pickup"
         app:layout_constraintStart_toStartOf="@+id/statusText2"
         app:layout_constraintTop_toBottomOf="@+id/statusText2" />
 
@@ -140,7 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="On the way"
+        android:text="On the way to delivery"
         android:textColor="@color/black8"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/statusIcon3"
@@ -150,6 +151,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
     <TextView
+        android:id="@+id/subtext3_statustext3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your delivery is on it's way to be delivered"

@@ -2,6 +2,7 @@ package com.duarbd.duarclientapp.network;
 
 import com.duarbd.duarclientapp.model.ModelClient;
 import com.duarbd.duarclientapp.model.ModelDeliveryRequest;
+import com.duarbd.duarclientapp.model.ModelPaymentResponse;
 import com.duarbd.duarclientapp.model.ModelResponse;
 import com.duarbd.duarclientapp.model.ModelToken;
 
@@ -37,5 +38,15 @@ public interface ApiInterface {
 
     @POST("getRequestedDeliveryByClientId.php")
     Observable<List<ModelDeliveryRequest>> getRequestedDeliveryListByClientId(@Body  ModelClient client);
+
+    @POST("getDeliveryHistoryByClientId.php")
+    Observable<List<ModelDeliveryRequest>> getDeliveryHistoryByClientId(@Body ModelClient client);
+
+
+    @POST("updateClientPaymentStatus.php")
+    Observable<ModelResponse> updateClientPaymentStatus(@Body ModelDeliveryRequest deliveryRequest);
+
+    @POST("getPaymentStatusByClientId.php")
+    Observable<ModelPaymentResponse> getPaymentStatusByClientId(@Body ModelClient client);
 
 }

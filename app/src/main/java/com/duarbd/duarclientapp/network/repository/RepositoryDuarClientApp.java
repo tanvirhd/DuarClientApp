@@ -120,4 +120,41 @@ public class RepositoryDuarClientApp {
                 });
         return result;
     }
+
+    public LiveData<List<ModelDeliveryRequest>> getDeliveryHistoryByClientId(String clientid){
+        ModelClient client=new ModelClient(clientid);
+        MutableLiveData<List<ModelDeliveryRequest>> result=new MutableLiveData<>();
+        apiRequest.getDeliveryHistoryByClientId(client).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<ModelDeliveryRequest>>() {
+                    @Override
+                    public void accept(List<ModelDeliveryRequest> modelDeliveryRequests) throws Exception {
+                        result.postValue(modelDeliveryRequests);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "getDeliveryHistoryByClientId: error"+throwable.getMessage());
+                    }
+                });
+        return  result;
+    }
+
+    public LiveData<ModelResponse> updateClientPaymentStatus (ModelDeliveryRequest deliveryRequest){
+        MutableLiveData<ModelResponse> result=new MutableLiveData<>();
+        apiRequest.updateClientPaymentStatus(deliveryRequest).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ModelResponse>() {
+                    @Override
+                    public void accept(ModelResponse response) throws Exception {
+                        result.postValue(response);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "updateClientPaymentStatus: error:"+throwable.getMessage());
+                    }
+                });
+        return result;
+    }
 }
