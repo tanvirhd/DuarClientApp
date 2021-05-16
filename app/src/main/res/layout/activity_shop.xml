@@ -48,7 +48,15 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Future Work."
+            android:textSize="16dp"
+            android:gravity="center"/>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

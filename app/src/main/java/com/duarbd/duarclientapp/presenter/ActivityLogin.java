@@ -60,6 +60,8 @@ public class ActivityLogin extends AppCompatActivity {
 
 
     void init (){
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("Client Login");
         viewModelDuarClientApp=new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(ViewModelDuarClientApp.class);
         viewModelRoom=new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(ViewModelRoom.class);
     }

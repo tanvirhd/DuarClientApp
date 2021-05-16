@@ -46,7 +46,7 @@
             android:layout_marginRight="8dp"
             android:background="@color/colorPrimary"
             android:gravity="center"
-            android:text="Calculate Bill"
+            android:text="View Payment"
             android:textColor="@color/black0"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -135,8 +135,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             tools:listitem="@layout/layout_patment" />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

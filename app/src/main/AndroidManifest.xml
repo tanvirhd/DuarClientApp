@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuarClientApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presenter.ActivityPayment"></activity>
+        <activity android:name=".presenter.ActivityBusinessProfile"></activity>
+        <activity android:name=".presenter.ActivityPayment" />
         <activity android:name=".presenter.ActivityDeliveryHistory" />
         <activity android:name=".presenter.ActivityAddItem" />
         <activity android:name=".presenter.ActivityAddCategory" />

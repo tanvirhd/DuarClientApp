@@ -41,5 +41,14 @@ public class ActivityShop extends AppCompatActivity {
 
     void init(){
         bottomSheetBehavior=BottomSheetBehavior.from(binding.layoutAddBottomsheet.layoutAddBottomsheet);
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setTitle("My Shop");
+        binding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black);
+        binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 }

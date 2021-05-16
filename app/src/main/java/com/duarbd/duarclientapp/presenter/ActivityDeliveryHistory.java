@@ -34,7 +34,7 @@ public class ActivityDeliveryHistory extends AppCompatActivity implements Adapte
     private List<ModelDeliveryRequest> deliveryHistory;
     private AdapterDeliveryHistory adapterDeliveryHistory;
     private Dialog dialogLoading;
-    public static DecimalFormat twodigits = new DecimalFormat("00");
+    public DecimalFormat twodigits = new DecimalFormat("00");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

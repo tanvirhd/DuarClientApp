@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duarbd.duarclientapp.R;
@@ -96,7 +97,18 @@ public class ActivityHome extends AppCompatActivity implements AdapterOngoingDel
         binding.homeNav.setNavigationItemSelectedListener(this);
     }
 
+    void initHeader(){
+        View header =  binding.homeNav.getHeaderView(0);
+        TextView riderName = header.findViewById(R.id.tvHeaderClientName);
+        TextView tvHeaderInitial=header.findViewById(R.id.tvHeaderInitial);
+
+        String clientName=Utils.getPref(GlobalKey.CLIENT_NAME,"Client");
+        riderName.setText(clientName);
+        tvHeaderInitial.setText(clientName.charAt(0)+"");
+    }
+
     void init(){
+        initHeader();
         ongoingDeliveryList=new ArrayList<>();
         adapterOngoingDelivery=new AdapterOngoingDelivery(ongoingDeliveryList,this,this);
         binding.layoutOngoingOrderPage.recycOngoingOrder.setAdapter(adapterOngoingDelivery);
@@ -169,8 +181,7 @@ public class ActivityHome extends AppCompatActivity implements AdapterOngoingDel
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.businessProfile:
-                Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
-                binding.drawerlayout.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(ActivityHome.this,ActivityBusinessProfile.class));
                 break;
             case R.id.deliveryHistory:
                 startActivity(new Intent(ActivityHome.this,ActivityDeliveryHistory.class));
@@ -182,8 +193,9 @@ public class ActivityHome extends AppCompatActivity implements AdapterOngoingDel
                 startActivity(new Intent(ActivityHome.this,ActivityShop.class));
                 break;
             case R.id.logout:
-                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
-                binding.drawerlayout.closeDrawer(GravityCompat.START);
+                Utils.savePrefBoolean(GlobalKey.IS_LOGGED_IN,false);
+                startActivity(new Intent(ActivityHome.this,ActivityLogin.class));
+                finish();
                 break;
         }
         return true;

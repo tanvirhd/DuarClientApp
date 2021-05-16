@@ -30,9 +30,6 @@ public interface ApiInterface {
     @POST("updateFCMToken.php")
     Observable<ModelResponse> updateFCMToken2(@Body ModelToken clientToken);// ModelToken(uid,token)
 
-
-
-
     @POST("pnRequestNewDelivery.php")
     Observable<ModelResponse> sendDeliveryRequest(@Body ModelDeliveryRequest deliveryRequest);
 
