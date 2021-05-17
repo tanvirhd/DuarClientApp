@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +39,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     private ViewModelDuarClientApp viewModelDuarClientApp;
     private ViewModelRoom viewModelRoom;
+    private Dialog dialogLoading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,7 @@ public class ActivityLogin extends AppCompatActivity {
     void init (){
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle("Client Login");
+        dialogLoading=Utils.setupLoadingDialog(ActivityLogin.this);
         viewModelDuarClientApp=new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(ViewModelDuarClientApp.class);
         viewModelRoom=new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(ViewModelRoom.class);
     }
@@ -149,7 +152,7 @@ public class ActivityLogin extends AppCompatActivity {
     }
 
     void login(String phonenumber,String password){
-        //todo show waiting dialog
+        dialogLoading.show();
         ModelClient client=new ModelClient(phonenumber,password);
         viewModelDuarClientApp.clientLogin(client).observe(this, new Observer<ModelResponse>() {
             @Override
@@ -161,7 +164,10 @@ public class ActivityLogin extends AppCompatActivity {
                     storeFCMToken(client.getClientid());
                     saveClientInf(modelResponse);//saving client info into local DB
                 }
-                else Toast.makeText(ActivityLogin.this, "Wrong Credential", Toast.LENGTH_SHORT).show();
+                else {
+                    dialogLoading.dismiss();
+                    Toast.makeText(ActivityLogin.this, "Wrong Credential", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -170,6 +176,7 @@ public class ActivityLogin extends AppCompatActivity {
     private void saveClientInf(ModelResponse response){
         viewModelRoom.saveClientInfo(response);
     }
+
     private void storeFCMToken(String clientid) {
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
             @Override
@@ -181,9 +188,13 @@ public class ActivityLogin extends AppCompatActivity {
                                public void onChanged(ModelResponse modelResponse) {
                                    if(modelResponse!=null && modelResponse.getResponse()==1) {
                                        Utils.savePrefBoolean(GlobalKey.IS_TOKEN_AVAILABLE,true);
+                                       dialogLoading.dismiss();
                                        startActivity(new Intent(ActivityLogin.this,ActivityHome.class));finish();
                                    }
-                                   else Log.d(TAG, "onChanged: storing token failed");
+                                   else {
+                                       dialogLoading.dismiss();
+                                       Toast.makeText(ActivityLogin.this, "Token update failed!!", Toast.LENGTH_SHORT).show();
+                                   }
                                }
                            });
                 //viewModelDuarClientApp.storeFCMToken(new ModelToken(clientid,"client",s));
