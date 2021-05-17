@@ -157,4 +157,22 @@ public class RepositoryDuarClientApp {
                 });
         return result;
     }
+
+    public LiveData<ModelResponse> updateClientPassword(ModelClient client){
+        MutableLiveData<ModelResponse> result=new MutableLiveData<>();
+        apiRequest.updateClientPassword(client).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ModelResponse>() {
+                    @Override
+                    public void accept(ModelResponse response) throws Exception {
+                        result.postValue(response);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, "updateClientPassword: error: "+throwable.getMessage());
+                    }
+                });
+        return result;
+    }
 }

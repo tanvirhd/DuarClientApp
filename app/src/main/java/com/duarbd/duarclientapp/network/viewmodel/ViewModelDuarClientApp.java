@@ -101,5 +101,8 @@ public class ViewModelDuarClientApp extends AndroidViewModel {
     public LiveData<ModelResponse> updateClientPaymentStatus (ModelDeliveryRequest deliveryRequest){
         return repository.updateClientPaymentStatus(deliveryRequest);
     }
+    public LiveData<ModelResponse> updateClientPassword(ModelClient client){
+        return repository.updateClientPassword(client);
+    }
 
 }

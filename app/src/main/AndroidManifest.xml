@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuarClientApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presenter.ActivityBusinessProfile"></activity>
+        <activity android:name=".presenter.ActivityBusinessProfile"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".presenter.ActivityPayment" />
         <activity android:name=".presenter.ActivityDeliveryHistory" />
         <activity android:name=".presenter.ActivityAddItem" />

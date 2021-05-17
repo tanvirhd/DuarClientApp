@@ -46,4 +46,7 @@ public interface ApiInterface {
     @POST("getPaymentStatusByClientId.php")
     Observable<ModelPaymentResponse> getPaymentStatusByClientId(@Body ModelClient client);
 
+    @POST("updateClientPassword.php")
+    Observable<ModelResponse> updateClientPassword(@Body ModelClient client);
+
 }
